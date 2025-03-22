@@ -8,3 +8,6 @@ def leaderboard(request):
 
 def about(request):
   return render(request, 'about.html')
+  
+def bike_game(request):
+  return render(request, 'bike_game.html')
