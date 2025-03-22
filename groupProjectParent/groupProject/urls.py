@@ -26,5 +26,6 @@ urlpatterns = [
     path('', include('leaderboard.urls')),
     path('', include('quizes.urls')),
     path('profile/', include('UserProfile.urls')),
+    path('bike_game/', bike_game, name="bike_game"),
     path('EnergyConservationMinigame/', include('EnergyConservationMinigame.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
