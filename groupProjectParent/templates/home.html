@@ -3,9 +3,11 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-
-<h1>
-    Home
-</h1>
+<link rel="stylesheet" type="text/css" href="{% static 'homepage/styles.css' %}">
+<div class="other">
+    <body>
+        <h1>Home</h1>
+    </body>
+</div>
 {% include "dashboard.html" %}
 {% endblock %}
