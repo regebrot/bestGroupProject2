@@ -1,21 +1,22 @@
 from django.db import models
-
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 
+class LeaderboardEntry(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    game = models.CharField(max_length=100)  # e.g., "Energy Conservation"
+    score = models.FloatField()
+    date = models.DateTimeField(auto_now_add=True)
 
-
-# Create your models here.
-class leaderboard(models.Model):
-    username = models.OneToOneField(User, on_delete=models.CASCADE, default=1)
-    saved_username = models.CharField(max_length=150, default="")
-    points = models.IntegerField(default=0)
+    class Meta:
+        ordering = ['-score']  
 
     def __str__(self):
-        return self.saved_username + ' ' + str(self.points)
+        return f"{self.user.username} - {self.game}: {self.score}"
 
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        leaderboard.objects.create(username=instance, saved_username=instance.username, points=0)
+class Badge(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    description = models.TextField(blank=True)
+    icon = models.ImageField(upload_to='badges/', blank=True, null=True)
+
+    def __str__(self):
+        return self.name
