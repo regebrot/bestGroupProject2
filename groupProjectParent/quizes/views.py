@@ -7,11 +7,13 @@ from django.utils import timezone
 from django.db.models import F
 from leaderboard.models import LeaderboardEntry
 import json
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='my-login')
 def quiz_list(request):
     quizzes = Quiz.objects.all()
     return render(request, 'quiz_list.html', {'quizzes': quizzes})
-
+@login_required(login_url='my-login')
 def quiz_data(request, quiz_id):
     quiz = get_object_or_404(Quiz, id=quiz_id)
     questions = []
@@ -19,7 +21,7 @@ def quiz_data(request, quiz_id):
         answers = [a.text for a in q.get_answers()]
         questions.append({"question": q.text, "answers": answers})
     return JsonResponse({'quiz': quiz.title, 'questions': questions})
-
+@login_required(login_url='my-login')
 def quiz_detail(request, quiz_id):
     quiz = get_object_or_404(Quiz, id=quiz_id)
     questions = quiz.get_questions()
