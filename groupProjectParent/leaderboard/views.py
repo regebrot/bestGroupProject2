@@ -3,7 +3,9 @@ from django.contrib.auth.models import User
 from django.db.models import Max
 from .models import LeaderboardEntry
 from .utils import update_badges
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='my-login')
 def leaderboard_view(request):
     update_badges()
     games = ["Energy Conservation", "Recycling", "Cycling", "Quiz"]
