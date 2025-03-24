@@ -1,5 +1,5 @@
 .navbar {
-    background-color: #0000ff;
+    background-color: #00a87e;
     overflow: hidden;
     height: 60px; 
     display: flex;
@@ -22,8 +22,8 @@
     }
 
         .navbar-links a:hover {
-            background-color: #ddd;
-            color: black;
+            background-color: #00c896;
+            color: #003c3c;
         }
 
 .navbar-profile {
@@ -36,3 +36,76 @@
     object-fit: cover;
     cursor: pointer;
 }
+
+.dashboard-header {
+    grid-column: 1 / span 3; 
+    text-align: left;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.dashboard-container {
+    margin-top: 70px;
+    background-color: #003c3c;
+    border-radius: 20px;
+    padding: 20px;
+    width: 90vw;
+    max-width: 600px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, auto);
+    gap: 20px;
+    color: #000;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.gauge {
+    border-radius: 50%;
+    background: conic-gradient(#00c896 calc(var(--percent, 0) * 1%), #022020 0);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+    .gauge span {
+        position: absolute;
+        z-index: 2;
+    }
+
+    .gauge.minigame {
+        width: 80px;
+        height: 80px;
+        font-size: 0.9rem;
+    }
+
+    .gauge.overall {
+        grid-column: 3;
+        grid-row: 2;
+        width: 150px;
+        height: 150px;
+        font-size: 1.2rem;
+    }
+
+    .gauge.energy {
+        grid-column: 1;
+        grid-row: 3;
+    }
+
+    .gauge.cycling {
+        grid-column: 2;
+        grid-row: 3;
+    }
+
+    .gauge.recycling {
+        grid-column: 4;
+        grid-row: 3;
+    }
+
+    .gauge.quiz {
+        grid-column: 5;
+        grid-row: 3;
+    }
