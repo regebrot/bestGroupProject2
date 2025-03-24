@@ -2,9 +2,10 @@ from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.timezone import now
-from quizes.models import Quiz, Question, Result
+from .models import Quiz, Question, Result
+from django.utils import timezone
 from django.db.models import F
-from leaderboard.models import leaderboard
+from leaderboard.models import LeaderboardEntry
 import json
 
 def quiz_list(request):
@@ -40,7 +41,16 @@ def submit_quiz(request, quiz_id):
                 score += 1
 
         result = Result.objects.create(user=request.user, quiz=quiz, score=score, time_taken=time_taken)
-        leaderboard.objects.filter(username=request.user).update(points=F('points') + Result.objects.values('score'))
+        game_name = "Quiz"  # Identifier for the quiz minigame
+        entry, created = LeaderboardEntry.objects.get_or_create(
+            user=request.user,
+            game=game_name,
+            defaults={'score': score, 'date': timezone.now()}
+        )
+        if not created and score > entry.score:
+            entry.score = score
+            entry.date = timezone.now()
+            entry.save()
 
         return JsonResponse({'score': score, 'time_taken': time_taken})  # Return time_taken
     return HttpResponse(status=405)
