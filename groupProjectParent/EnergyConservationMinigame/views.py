@@ -9,7 +9,7 @@ DEVICES = ["lamp", "bunny_light", "monitor", "headphones", "laptop", "lava_lamp"
 GAME_DURATION = 25
 GAME_NAME = "Energy Conservation"
 
-@login_required
+@login_required(login_url='my-login')
 def index(request):
     """Initialize or restore game state."""
     if "game_state" in request.session:
