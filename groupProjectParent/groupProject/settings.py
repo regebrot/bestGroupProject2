@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'EnergyConservationMinigame',
     'quizes',
     'UserProfile.apps.UserprofileConfig',
+    'Recycle',
 ]
 
 MIDDLEWARE = [
