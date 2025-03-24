@@ -1,7 +1,7 @@
 from django.urls import path
 
-from .views import leaderboards
+from .views import leaderboard_view
 
 urlpatterns = [
-    path("leaderboard", leaderboards, name="leaderboards"),
+    path("leaderboard", leaderboard_view, name="leaderboard_home"),
 ]
