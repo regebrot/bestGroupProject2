@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Home{% endblock %}
 
 {% block content %}
@@ -7,4 +7,5 @@
 <h1>
     Home
 </h1>
+{% include "dashboard.html" %}
 {% endblock %}
