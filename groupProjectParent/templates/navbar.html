@@ -4,7 +4,7 @@
     <div class="navbar-links">
         {% url 'home' as home_url %}
         <span>{% if request.path == home_url %}Home{% else %}<a href="{{ home_url }}">Home</a>{% endif %}</span>
-        {% url 'leaderboards' as leaderboard_url %}
+        {% url 'leaderboard_home' as leaderboard_url %}
         <span>{% if request.path == leaderboard_url %}Leaderboards{% else %}<a href="{{ leaderboard_url }}">Leaderboards</a>{% endif %}</span>
         {% url 'about' as about_url %}
         <span>{% if request.path == about_url %}About{% else %}<a href="{{ about_url }}">About</a>{% endif %}</span>
