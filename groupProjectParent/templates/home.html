@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'homepage/styles.css' %}">
+<style>
+    .box-container {
+        border: 2px solid #00a87e;
+        padding: 20px;
+        margin: 20px auto;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        text-align: center;
+    }
+    .box-container h1 {
+        color: #003c3c;
+        text-align: center;
+        /* Reset any other properties you want to control */
+        padding: 0 !important;
+        background-color: transparent !important;
+    }
+</style>
+<div class="other">
+    <body>
+        <h1>Home</h1>
+    </body>
+</div>
+{% include "dashboard.html" %}
+<body>
+    <br>
+    <br>
+    <br>
+    <div class = "box-container">
+        <h1>Our games</h1>
+        <p>Quiz Game – One of our ways of promoting sustainability is to increase your knowledge of the area. We have a quiz game that you can find at *X location* to test yourself on how much you know about sustainability, and who knows maybe you could learn something new in participation!<p>
+        <br>
+        <p>Platformer – We all know that cars are incredibly bad for the environment, producing much more CO2 than is necessary. We encourage sustainable forms of transportation, such as cycling! In our platformer game, you can travel by bike, avoiding those pesky drivers causing pollution, just head on over to *K location* and scan the QR code to get started. </p>
+        <br>
+        <p>(Bin)der – Lets play Hot or Not, but with a twist! Does this go in the recycling bin, or the regular bin? Make an attempt at sorting litter into which bin it should have been put in, game found at *Y location*. (Made using litter found on and around the university campus)</p>
+        <br>
+        <p>Spot the energy waster – Have you ever worried about your electricity bills? You could save money and electricity by turning off your electronics when they aren’t in use! We have created a game that can help you practice this, to hopefully help yourself, and the planet, by spotting which electronics are turned on and turning them off. You can do this by heading over to *Z location*, and scanning the QR code there to access the game.</p>
+    </div>
+</body>
+{% endblock %}

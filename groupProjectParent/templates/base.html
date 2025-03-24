@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'homepage/styles2.css' %}">
+        <meta charset="utf-8">
+        <title>{% block title %}BestGroup Project{% endblock %}</title>
+    </head>
+    <body>
+        <h1>Welcome to the BestGroup Project</h1>
+        {% include 'navbar.html' %}
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+    </body>
+</html>
