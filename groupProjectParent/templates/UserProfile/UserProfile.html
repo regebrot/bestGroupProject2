@@ -2,32 +2,35 @@
 {% load static %}
 
 {% block content %}
-<h1>{{ profile.display_name|default:profile.user.username }}'s Profile</h1>
-
-<div>
-    <img src="{{ profile.profile_image.url }}" alt="Profile Image" width="150">
-</div>
-
-<h2>Badges</h2>
-<div class="badges">
-    {% if profile.badges.all %}
-    {% for badge in profile.badges.all %}
-    <div class="badge">
-        {% if badge.icon %}
-        <img src="{{ badge.icon.url }}" alt="{{ badge.name }}" class="badge-icon">
-        {% endif %}
-        <span class="badge-name">{{ badge.name }}</span>
+<link rel="stylesheet" href="{% static 'UserProfile/../../static/homepage/../../static/UserProfile/styles.css' %}">
+<div class = "box-container">
+    <h1>{{ profile.display_name|default:profile.user.username }}'s Profile</h1>
+    
+    <div>
+        <img src="{{ profile.profile_image.url }}" alt="Profile Image" width="150">
     </div>
-    {% endfor %}
-    {% else %}
-    <p>No badges yet.</p>
-    {% endif %}
+    
+    <h2>Badges</h2>
+    <div class="badges">
+        {% if profile.badges.all %}
+        {% for badge in profile.badges.all %}
+        <div class="badge">
+            {% if badge.icon %}
+            <img src="{{ badge.icon.url }}" alt="{{ badge.name }}" class="badge-icon">
+            {% endif %}
+            <span class="badge-name">{{ badge.name }}</span>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>No badges yet.</p>
+        {% endif %}
+    </div>
+    
+    <h2>Edit Profile</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Changes</button>
+    </form>
 </div>
-
-<h2>Edit Profile</h2>
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save Changes</button>
-</form>
 {% endblock %}
