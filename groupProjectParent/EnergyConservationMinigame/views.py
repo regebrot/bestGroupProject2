@@ -12,6 +12,10 @@ GAME_NAME = "Energy Conservation"
 @login_required
 def index(request):
     """Initialize or restore game state."""
+    if "game_state" in request.session:
+        if request.session["game_state"]["status"] == False:
+            del request.session["game_state"]
+
     if "game_state" not in request.session:
         states = {device: random.choice([True, False]) for device in DEVICES}
         threshold = 4
@@ -26,6 +30,7 @@ def index(request):
             "devices": states,
             "score": 25,
             "start_time": time.time(),
+            "status" : True,
         }
     
     game_state = request.session["game_state"]
@@ -44,9 +49,13 @@ def index(request):
             entry.score = final_score
             entry.date = timezone.now()
             entry.save()
+        game_state["status"] = False
+        request.session["game_state"] = game_state
         return render(request, "EnergyConservationMinigame/win.html", {"score": final_score, "time_taken": elapsed_ms / 1000})
 
     if elapsed_time >= GAME_DURATION:
+        game_state["status"] = False
+        request.session["game_state"] = game_state
         return redirect("game_over")
 
     return render(request, "EnergyConservationMinigame/game.html", {"game": game_state, "time_left": round(GAME_DURATION - elapsed_time, 3)})
